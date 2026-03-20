@@ -1,24 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import { Container, Button, Navbar, Card, Form } from 'react-bootstrap';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <div className="d-flex justify-content-center align-items-center vh-100">
+      <Container className='text-center border border-dark' style={{ width: '350px' }}>
+        <Form className="text-start">Username:</Form>
+        <Card>Enter your Username</Card>
+        <Form className="text-start">Password:</Form>
+        <Card>Enter your Password</Card>
+        <Button> Log In</Button>
+      </Container>
+   </div>
   );
 }
 
