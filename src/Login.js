@@ -11,6 +11,16 @@ function Login() {
   const [error, setError] = useState("");
 
   const handleLogin = () => {
+    if (!email) {
+      setError("Email is requred.");
+      return;
+    }
+
+    if (!password) {
+      setError("Password is requred.");
+      return;
+    }
+
     const foundUser = USERS.find(
       (user) =>
         user.email.toLowerCase() === email.toLowerCase() &&
@@ -48,7 +58,7 @@ function Login() {
           />
         </Form>
         {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
-        <Button className="mt-2 w-100" onClick={handleLogin}>
+        <Button className="mt-2 w-100" onClick={() => navigate("/home")}>
           Log In
         </Button>
       </Container>
