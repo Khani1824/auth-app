@@ -1,6 +1,6 @@
 import "./App.css";
 import { Container, Button, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { USERS } from "./users";
 import { useState } from "react";
 
@@ -9,6 +9,8 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const location = useLocation();
+  const redirectMessage = location.state?.message;
 
   const handleLogin = (e) => {
     if (e) e.preventDefault();
@@ -58,6 +60,11 @@ function Login() {
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
+          {redirectMessage && (
+            <div className="text-danger mt-2" style={{ fontSize: "14px" }}>
+              {redirectMessage}
+            </div>
+          )}
         </div>
         {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
         <Button className="mt-2 w-100" onClick={(e) => handleLogin(e)}>

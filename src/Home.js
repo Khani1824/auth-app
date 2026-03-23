@@ -1,11 +1,19 @@
 import "./App.css";
 import { Button, Navbar, Nav, Container } from "react-bootstrap";
 import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Home() {
   const navigate = useNavigate();
   const location = useLocation();
   const userEmail = location.state?.email;
+  useEffect(() => {
+    if (!userEmail) {
+      navigate("/login", {
+        state: { message: "Please enter your email and password" },
+      });
+    }
+  }, [userEmail, navigate]);
   return (
     <div>
       <Navbar className="shadow p-2">
