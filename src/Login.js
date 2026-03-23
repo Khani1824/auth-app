@@ -1,5 +1,5 @@
 import "./App.css";
-import { Container, Button, Navbar, Card, Form } from "react-bootstrap";
+import { Container, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { USERS } from "./users";
 import { useState } from "react";
@@ -10,7 +10,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    if (e) e.preventDefault();
     if (!email) {
       setError("Email is requred.");
       return;
@@ -28,7 +29,8 @@ function Login() {
     );
 
     if (foundUser) {
-      navigate("/home");
+      console.log("Success! Navigating...");
+      navigate("/home", { state: { email: email } });
     } else {
       setError("Incorrect email or password. Please try again.");
     }
@@ -41,24 +43,24 @@ function Login() {
         style={{ width: "350px" }}
       >
         <h1>Sign In</h1>
-        <Form className="p-1 text-start">
-          <Form className=" p-1 text-start">Email address:</Form>
+        <div className="p-1 text-start">
+          <label className="p-1">Email address:</label>
           <Form.Control
             type="email"
             placeholder="Enter email"
             onChange={(e) => setEmail(e.target.value)}
           />
-        </Form>
-        <Form className="p-1 text-start mb-2">
-          <Form className="p-1 text-start">Password:</Form>
+        </div>
+        <div className="p-1 text-start mb-2">
+          <label className="p-1">Password:</label>
           <Form.Control
             type="password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-        </Form>
+        </div>
         {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
-        <Button className="mt-2 w-100" onClick={() => navigate("/home")}>
+        <Button className="mt-2 w-100" onClick={(e) => handleLogin(e)}>
           Log In
         </Button>
       </Container>

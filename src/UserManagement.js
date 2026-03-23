@@ -1,11 +1,20 @@
 import "./App.css";
-import { Container, Button, Navbar, Nav, Form } from "react-bootstrap";
+import { useLocation, Link } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
 
 function UserManagement() {
+  const location = useLocation();
+  const email = location.state?.email;
+
   return (
     <div>
       <Navbar className="shadow p-3">
-        <Nav.Link href="/home" className="me-3">
+        <Nav.Link
+          as={Link}
+          to="/home"
+          state={{ email: email }}
+          className="me-3"
+        >
           ← Back
         </Nav.Link>
       </Navbar>
